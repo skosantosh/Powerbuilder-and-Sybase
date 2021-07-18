@@ -1,0 +1,2 @@
+RegistryGet( "HKEY_LOCAL_MACHINE\Software\FileFolder\FileName","Client", RegString!, ls_titlefont)
+Location in Registry from where string value will store in ls_titlefont
