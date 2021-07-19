@@ -1,0 +1,4 @@
+  SELECT DISTINCT "cash_received"."user_type"  
+    INTO :lsUserType 
+    FROM "cash_received"  
+   WHERE "cash_received"."payamount" >= 100    
