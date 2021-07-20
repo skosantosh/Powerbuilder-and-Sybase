@@ -1,0 +1,28 @@
+if keydown(keyControl!) and keydown(keyd!) then
+	dw_phone_date.deleterow(dw_phone_date.GetRow())
+end if
+if keydown(keyControl!) and keydown(keyi!) then
+	giItemNewEnry=1
+	Open(w_item_entry)
+end if
+if keydown(keyControl!) and keydown(keyt!) then
+	dw_short_namelist.Visible=True
+	iiEntryStale=2 //byinserting
+Elseif keydown(keyControl!) and keydown(keyf!) then
+	dw_short_namelist.Visible=False
+end if 
+
+if this.Getcolumnname()="other_bill" then
+	if lilen>=1 and ldTotalAmount >0 then
+		if keydown(keyEnter!) then
+			li_row=dw_phone_date.Insertrow(0)
+			dw_phone_date.SetItem(li_row,"edate",iddate)
+			dw_phone_date.SetRow(dw_phone_date.Rowcount())
+			dw_phone_date.SetColumn(27)
+			dw_phone_date.SetItem(li_row,"name_code",isNameCode)
+			dw_phone_date.SetItem(li_row,"ex_1",0)
+			dw_phone_date.SetItem(li_row,"other_bill",isMname)
+			dw_phone_date.SetItem(li_row,"ms_entry_middle_name",isMname)
+			dw_phone_date.SetItem(li_row,"personinvoice",f_max_id("phone_data","personinvoice")+1)
+		end if 
+	End if 
