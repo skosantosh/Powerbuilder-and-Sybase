@@ -1,0 +1,19 @@
+/*  Set toolbar alignment status  */
+Choose Case iw_window.ToolbarAlignment
+		
+	Case AlignAtBottom! 
+		rb_bottom.Checked = True
+		
+	Case AlignAtLeft!
+		rb_left.Checked = True
+		
+	Case AlignAtRight! 
+		rb_right.Checked = True
+		
+	Case AlignAtTop! 
+		rb_top.Checked = True
+		
+	Case Floating!
+		rb_floating.Checked = True
+		
+End Choose
