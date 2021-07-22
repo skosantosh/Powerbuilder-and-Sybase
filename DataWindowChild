@@ -1,0 +1,10 @@
+DataWindowChild ItemCode_Child // Declear DataWindowChaild in Sntance Variable
+
+//I wrote this script initemchage event
+
+if this.getcolumnname()="item_code" then
+	ItemCode_Child.Accepttext()
+	isItemCode=ItemCode_Child.GetitemString(ItemCode_Child.GetRow(),"item_code")
+else
+	isItemCode=this.Getitemstring(row,"item_code")
+end if 
