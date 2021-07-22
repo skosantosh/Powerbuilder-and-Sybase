@@ -1,4 +1,4 @@
-DataWindowChild ItemCode_Child // Declear DataWindowChaild in Sntance Variable
+DataWindowChild ItemCode_Child // Declear DataWindowChaild in instance Variables
 
 //I wrote this script initemchage event
 
