@@ -1,6 +1,6 @@
 DataWindowChild ItemCode_Child // Declear DataWindowChaild in instance Variables
 
-//I wrote this script initemchage event
+//I wrote this script in itemchage event
 
 if this.getcolumnname()="item_code" then
 	ItemCode_Child.Accepttext()
