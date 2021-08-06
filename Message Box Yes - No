@@ -1,0 +1,54 @@
+Syntax
+integer Net
+long Distance = 3.457
+ 
+Net = MessageBox("Result", Abs(Distance), &
+    Exclamation!, OKCancel!, 2)
+IF Net = 1 THEN
+ ... // Process OK.
+ELSE
+ ... // Process CANCEL.
+END IF
+
+Example
+
+liYesNo = MessageBox("Result","Add Service Charge", Exclamation!, YesNo!, 2)
+	lsTotalAmount=dw_detail_report.Describe("t_totalamount.text")
+	lsTotalpaid=dw_detail_report.Describe("t_paid.text")
+
+	IF liYesNo = 1 THEN
+		lsTotalAmount=dw_detail_report.Describe("t_totalamount.text")
+		lsTotalpaid=dw_detail_report.Describe("t_paid.text")
+		
+		lsPsc=ProfileString ( "Ledger.ini", "Ps_charge", "Psc", "not found" )
+		dw_detail_report.Modify("t_scharge.text = ~""+lsPsc+"~"")
+		ldPsc=dec(lsPsc)
+		ldtotalamount=(dec(lsTotalAmount) + dec(lsPsc))
+		dw_detail_report.Modify("t_totalamount.text = ~"" +string(ldtotalamount) +"~"")
+		dw_detail_report.Modify("t_bal.text = ~"" +string(ldtotalamount - dec(lsTotalpaid) ) +"~"")
+		
+		SELECT max("phone_data"."dataid"),   
+				 max("phone_data"."personinvoice")  
+		INTO :llmaxdataid,:llmaxid  
+		FROM "phone_data"  ;
+		
+		if isnull(llmaxdataid) then llmaxdataid=0
+		llmaxdataid=llmaxdataid+1
+		if isnull(llmaxid) then llmaxid=0
+		llmaxid=llmaxid+1
+		
+		INSERT INTO "phone_data"  
+		          ( "dataid","edate","item_code","total_time","amount_phone","pay_type","ph_remarks",   
+		            "runstop","total_qty","ph_rate","personinvoice","name_code","ex_1","other_bill",   
+		            "s_charge" )  
+		VALUES (    :llmaxdataid,:ldtoday,'SC','00:00:00',:ldPsc,2,'S.Charge',   
+		            'stop',1,:ldPsc,:llmaxid,:isCode,0,1,
+		            0 )  ;
+		            commit using sqlca;
+						
+						wf_totalamount(isCode)
+						f_min_max_date (isCode,f_max_id("min_max_date","id")+1)		
+	else
+		lsPsc='.00'
+		dw_detail_report.Modify("t_scharge.text = ~""+lsPsc+"~"")
+	end if
